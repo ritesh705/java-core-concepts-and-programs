@@ -7,7 +7,8 @@ class A extends B
 		System.out.println("Abstracton");
 	}
 	
-	public static void main(String args[]){
+	public static void main(String args[])
+	{
 		B obj = new A();
 		obj.method();
 	}
