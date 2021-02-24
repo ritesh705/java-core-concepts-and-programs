@@ -18,12 +18,11 @@ public class Lambda
         testLambda.add("Two");
         testLambda.forEach(p->printResult(p));
         testLambda.stream().filter(p->p.equals("One")).forEach(q -> System.out.println(q));
-
-        Runnable r1 = () -> System.out.println("Message");
     }
 
     private static void printResult(String str)
     {
         System.out.println(str);
     }
+    
 }
