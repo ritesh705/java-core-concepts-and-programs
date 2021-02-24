@@ -2,6 +2,9 @@ package com.ritesh.java.programs;
 
 import static java.lang.Math.sqrt;
 
+/*
+* HackerRank OddPrimeDigit Program With Category Implemented.
+* */
 public class OddPrimeDigit
 {
     public static void main(String[] args)
