@@ -2,6 +2,7 @@ package com.ritesh.java.concepts.java8;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ForEach
 {
@@ -13,7 +14,6 @@ public class ForEach
         list.add("test03");
         list.add("test04");
         list.add("test05");
-
         // Java 8 For Each Loop
         list.forEach(obj -> System.out.println(obj));
     }
