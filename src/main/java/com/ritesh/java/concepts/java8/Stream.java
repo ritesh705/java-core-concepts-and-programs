@@ -2,19 +2,21 @@ package com.ritesh.java.concepts.java8;
 
 import java.util.*;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 public class Stream
 {
     public static void main(String[] args)
     {
-        Map<String, Integer> countMap = getCountMap();
+        createMap();
         processEmployeeData();
     }
 
-    public static Map<String, Integer> getCountMap()
+    public static void createMap()
     {
         List<String> inputs = Arrays.asList("AB", "BC", "AB", "CD", "DE");
+
+        // Method 01
         Map<String, Integer > countMap = new HashMap<>();
         if(inputs != null && inputs.size() > 0)
         {
@@ -31,12 +33,9 @@ public class Stream
             });
         }
 
-        List<String> testList = inputs.stream()
-                .filter(ip1 -> ip1.equals("AB"))
-                .map(ip2 -> ip2+"A")
-                .collect(toList());
-
-        return countMap;
+        // Method 2
+        Map<Object, Long> countMap01 =
+                inputs.stream().collect(groupingBy(ip -> ip, counting()));
     }
 
     private static void processEmployeeData()
