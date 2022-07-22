@@ -1,4 +1,4 @@
-package com.ritesh.java.concepts.java8;
+package com.ritesh.java.concepts.java8.lambda;
 
 import java.util.ArrayList;
 import java.util.List;

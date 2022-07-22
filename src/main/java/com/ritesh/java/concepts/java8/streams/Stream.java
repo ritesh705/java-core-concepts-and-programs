@@ -1,4 +1,4 @@
-package com.ritesh.java.concepts.java8;
+package com.ritesh.java.concepts.java8.streams;
 
 import java.util.*;
 
