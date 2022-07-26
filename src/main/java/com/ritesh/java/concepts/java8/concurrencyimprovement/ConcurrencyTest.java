@@ -7,7 +7,7 @@ public class ConcurrencyTest
 {
     public static void main(String[] args) throws ExecutionException, InterruptedException
     {
-        runOldConcurrencyExample();
+        /*runOldConcurrencyExample();
         runJava5ConcurrencyExample();
         runJava8ConcurrencyExample01(); // CompletableFuture And Runnable
         runJava8ConcurrencyExample02(); // CompletableFuture And Supplier
@@ -16,7 +16,8 @@ public class ConcurrencyTest
         runJava8ConcurrencyExample05(); // thenApply | Callback method supported by Completable Future
         runJava8ConcurrencyExample06(); // Chaining Callbacks
         runJava8ConcurrencyExample07(); // Combining Results from multiple Completable Future
-        runJava8ConcurrencyExample08(); // Exception Handling In Completable Future
+        runJava8ConcurrencyExample08(); // Exception Handling In Completable Future*/
+        runJava8ConcurrencyExample01();
     }
 
     private static void runOldConcurrencyExample()
@@ -68,12 +69,19 @@ public class ConcurrencyTest
         executorService.shutdown();
     }
 
-    private static void runJava8ConcurrencyExample01()
-    {
+    private static void runJava8ConcurrencyExample01() throws InterruptedException {
         System.out.println("Inside runJava8ConcurrencyExample01");
-        Runnable runnable = () -> System.out.println("Inside Runnable");
+        Runnable runnable = () -> {
+            System.out.println("Inside Runnable");
+            for(int i =0; i<1000;i++)
+            {
+                System.out.println(Thread.currentThread().getName());
+                System.out.println(i);
+            }
+        };
         System.out.println("Main Started...");
         CompletableFuture<Void> result = CompletableFuture.runAsync(runnable);
+        Thread.sleep(10000);
         System.out.println("Do other parallel task.");
         System.out.println("Task Completed");
     }
