@@ -5,7 +5,7 @@ import com.ritesh.java.concepts.java8.util.UserStats;
 import java.util.*;
 import java.util.stream.*;
 
-class VisitCounter
+class ListOfMapToMap
 {
 
     public static void main(String[] args)
