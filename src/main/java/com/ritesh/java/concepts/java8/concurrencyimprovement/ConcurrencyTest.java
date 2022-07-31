@@ -7,8 +7,8 @@ public class ConcurrencyTest
 {
     public static void main(String[] args) throws ExecutionException, InterruptedException
     {
-        /*runOldConcurrencyExample();
-        runJava5ConcurrencyExample();
+        runOldConcurrencyExample(); // Concurrency Before Java 5
+        runJava5ConcurrencyExample(); // Concurrency | Java 5
         runJava8ConcurrencyExample01(); // CompletableFuture And Runnable
         runJava8ConcurrencyExample02(); // CompletableFuture And Supplier
         runJava8ConcurrencyExample03(); // Manually Completing Thread
@@ -16,8 +16,7 @@ public class ConcurrencyTest
         runJava8ConcurrencyExample05(); // thenApply | Callback method supported by Completable Future
         runJava8ConcurrencyExample06(); // Chaining Callbacks
         runJava8ConcurrencyExample07(); // Combining Results from multiple Completable Future
-        runJava8ConcurrencyExample08(); // Exception Handling In Completable Future*/
-        runJava8ConcurrencyExample01();
+        runJava8ConcurrencyExample08(); // Exception Handling In Completable Future
     }
 
     private static void runOldConcurrencyExample()

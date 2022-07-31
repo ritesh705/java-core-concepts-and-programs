@@ -33,18 +33,22 @@ public class Stream
             });
         }
 
-        // Method 2
+        // Method 02 | Using collect
         Map<Object, Long> countMap01 =
                 inputs.stream().collect(groupingBy(ip -> ip, counting()));
+
+        countMap01.entrySet().forEach((kv) -> System.out.println(kv));
     }
 
     private static void processEmployeeData()
     {
         Employee e1 = new Employee("Krishna", "SE", 150000.00);
-        Employee e2 = new Employee("Ram", "SE", 150000.00);
+        Employee e2 = new Employee("Ram", "SSE", 250000.00);
         Employee e3 = new Employee("Shiva", "SSE", 200000.00);
+        Employee e4 = new Employee("Krishna", "SSE", 200000.00);
+        Employee e5 = new Employee("Ram", "SSE", 249999.00);
 
-        List<Employee> employees = Arrays.asList(e1, e2, e3);
+        List<Employee> employees = Arrays.asList(e1, e2, e3, e4, e5);
 
         // Using Collect
         final double[] totalSalary = {0};
@@ -54,12 +58,17 @@ public class Stream
                 .collect(toList());
         System.out.println(salaryList.get(salaryList.size()-1));
 
-        // Using Reduce
-        Optional<Double> salaries = employees.stream()
+        // Using Reduce | Recommended
+        Optional<Double> sumOfSalary = employees.stream()
                 .filter(e -> e.getDepartment().equals("SE"))
                 .map(e01 -> e01.getSalary())
                 .reduce((s1, s2) -> s1+s2);
-        salaries.ifPresent(System.out::println);
+        sumOfSalary.ifPresent(System.out::println);
+
+        // Sorting
+        employees.sort(Comparator.comparing(Employee :: getName).thenComparing(Employee :: getSalary));
+
+        employees.forEach(e-> System.out.println(e.getName()+" "+e.getSalary()));
     }
 
 }
