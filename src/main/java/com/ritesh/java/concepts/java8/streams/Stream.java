@@ -1,74 +1,101 @@
 package com.ritesh.java.concepts.java8.streams;
 
-import java.util.*;
+import com.ritesh.java.concepts.java8.util.Employee;
 
-import static java.util.stream.Collectors.*;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Stream
 {
     public static void main(String[] args)
     {
-        createMap();
-        processEmployeeData();
+        groupStringListUsingStream();
+        List<Employee> employees = getEmployees();
+        getTotalSalaryOfEmployeesBelongingToSEDepartment(employees);
+        groupEmployeesByDepartment(employees);
+        getSortedEmployeeList(employees);
+        sortIntegerByFrequency();
+        countEmployeeByDepartment();
     }
 
-    public static void createMap()
+    private static List<Employee> getEmployees()
     {
-        List<String> inputs = Arrays.asList("AB", "BC", "AB", "CD", "DE");
-
-        // Method 01
-        Map<String, Integer > countMap = new HashMap<>();
-        if(inputs != null && inputs.size() > 0)
-        {
-            inputs.forEach(ip->
-            {
-                if(countMap.get(ip) != null)
-                {
-                    countMap.put(ip, countMap.get(ip)+1);
-                }
-                else
-                {
-                    countMap.put(ip, 1);
-                }
-            });
-        }
-
-        // Method 02 | Using collect
-        Map<Object, Long> countMap01 =
-                inputs.stream().collect(groupingBy(ip -> ip, counting()));
-
-        countMap01.entrySet().forEach((kv) -> System.out.println(kv));
-    }
-
-    private static void processEmployeeData()
-    {
+        List<Employee> employees = null;
         Employee e1 = new Employee("Krishna", "SE", 150000.00);
         Employee e2 = new Employee("Ram", "SSE", 250000.00);
         Employee e3 = new Employee("Shiva", "SSE", 200000.00);
         Employee e4 = new Employee("Krishna", "SSE", 200000.00);
         Employee e5 = new Employee("Ram", "SSE", 249999.00);
+        employees = Arrays.asList(e1, e2, e3, e4, e5);
+        return employees;
+    }
 
-        List<Employee> employees = Arrays.asList(e1, e2, e3, e4, e5);
+    // Group And Count
+    public static void groupStringListUsingStream()
+    {
+        List<String> inputs = Arrays.asList("AB", "BC", "AB", "CD", "DE");
+        groupListOfStringUsingStream(inputs);
+    }
 
-        // Using Collect
-        final double[] totalSalary = {0};
-        List<Double> salaryList = employees.stream()
-                .filter(e -> e.getDepartment().equals("SE"))
-                .map(e -> totalSalary[0] = totalSalary[0]+e.getSalary())
-                .collect(toList());
-        System.out.println(salaryList.get(salaryList.size()-1));
+    private static void groupListOfStringUsingStream(List<String> inputs)
+    {
+        Map<Object, Long> countMap =
+                inputs.stream().collect(Collectors.groupingBy(ip -> ip, Collectors.counting()));
+        countMap.entrySet().forEach((kv) -> System.out.println(kv));
+    }
 
-        // Using Reduce | Recommended
+    // Sorting
+    private static void getSortedEmployeeList(List<Employee> employees)
+    {
+        employees.sort(Comparator.comparing(Employee :: getName).thenComparing(Employee :: getSalary));
+        employees.forEach(e-> System.out.println(e.getName()+" "+e.getSalary()));
+    }
+
+    // Group Employee By Department
+    private static void groupEmployeesByDepartment(List<Employee> employees)
+    {
+        Map<Object, Long> map =
+                employees.stream()
+                        .collect(Collectors.groupingBy(e -> e.getDepartment(), Collectors.counting()));
+        map.entrySet().stream().forEach(System.out::println);
+    }
+
+    // Total Salary Of Employee, Department = SE | Using Reduce | Recommended
+    private static void getTotalSalaryOfEmployeesBelongingToSEDepartment(List<Employee> employees)
+    {
         Optional<Double> sumOfSalary = employees.stream()
                 .filter(e -> e.getDepartment().equals("SE"))
                 .map(e01 -> e01.getSalary())
                 .reduce((s1, s2) -> s1+s2);
         sumOfSalary.ifPresent(System.out::println);
+    }
 
-        // Sorting
-        employees.sort(Comparator.comparing(Employee :: getName).thenComparing(Employee :: getSalary));
+    private static void countEmployeeByDepartment()
+    {
+        List<Employee> employees = getEmployees();
+        employees.stream()
+                .collect(Collectors.groupingBy(e -> e.getDepartment(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .forEach(System.out::println);
+    }
 
-        employees.forEach(e-> System.out.println(e.getName()+" "+e.getSalary()));
+    // Sort Integer On The Basis Of Frequency
+    private static void sortIntegerByFrequency()
+    {
+        List<Integer> numbers = Arrays.asList(1,2,2,3,4,7,6,6,6,8,10,10,10,10,10,5,6,6,9,9);
+        Map<Integer, Long> map = numbers
+                .stream()
+                .collect(Collectors.groupingBy(i-> i, Collectors.counting()));
+        System.out.println("Sorted Integers:");
+        map.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Collections.reverseOrder()))
+                .forEach(m -> {
+                    for(int i = 0; i< m.getValue(); i++)
+                    {
+                        System.out.print(m.getKey()+", ");
+                    }
+                });
     }
 
 }

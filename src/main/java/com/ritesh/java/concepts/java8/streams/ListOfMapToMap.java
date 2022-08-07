@@ -1,9 +1,9 @@
-package com.ritesh.java.concepts.java8.collectionimprovement;
+package com.ritesh.java.concepts.java8.streams;
 
 import com.ritesh.java.concepts.java8.util.UserStats;
 
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.Collectors;
 
 class ListOfMapToMap
 {
@@ -95,8 +95,9 @@ class ListOfMapToMap
                         && m.getValue() != null
                         && m.getValue().getVisitCount() != null
                         && m.getValue().getVisitCount().get() !=null)
-                .collect(Collectors.toMap(m->Long.parseLong(m.getKey()), m-> m.getValue().getVisitCount().get(), Long::sum));
-
+                .collect(Collectors
+                        .toMap(m->Long.parseLong(m.getKey()), m-> m.getValue().getVisitCount().get(),
+                                Long::sum));
         return countMap;
     }
 }
