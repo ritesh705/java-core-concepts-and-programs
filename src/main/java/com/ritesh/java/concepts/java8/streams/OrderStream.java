@@ -65,7 +65,7 @@ public class OrderStream
         System.out.println("Orders On Particular Date: ");
         List<Product> productsOrderOnParticularDate = orders.stream()
                 .filter(o-> o.getOrderDate().isEqual(LocalDate.parse("2022-01-01")))
-                .peek(o -> System.out.println("Order Id: "+o.getId()))
+                .peek(o -> System.out.println("Order Id: "+o.getId())) // To Print in between
                 .flatMap(o -> o.getProducts().stream())
                 .distinct()
                 .collect(Collectors.toList());
