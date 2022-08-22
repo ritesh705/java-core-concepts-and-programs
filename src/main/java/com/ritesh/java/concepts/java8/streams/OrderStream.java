@@ -59,7 +59,7 @@ public class OrderStream
         threeMostRecentOrders.forEach(o -> System.out.println("Order Date: "+o.getOrderDate()));
     }
 
-    // Orders On Particular Date
+    // Products Ordered On Particular Date
     private static void orderOnParticularDate()
     {
         System.out.println("Orders On Particular Date: ");
@@ -139,7 +139,7 @@ public class OrderStream
     // Data Map | Order, Product Total Sum
     private static void getOrderProductSumDataMap()
     {
-        /* Function.identity() is used to tell Collectors.toMap() to use the data element as the key
+        /* Function.identity() is used to tell Collectors.toMap() to use the data element as the key.
         Also we can use o->o in place of Function.identity() */
         Map<Order, Double> dataMap = orders.stream()
                 .collect(Collectors.toMap(Function.identity(), o->o.getProducts().stream()
