@@ -200,7 +200,8 @@ public class ConcurrencyTest
         System.out.println("Main Task Completed.");
     }
 
-    private static void runJava8ConcurrencyExample08() throws ExecutionException, InterruptedException {
+    private static void runJava8ConcurrencyExample08() throws ExecutionException, InterruptedException
+    {
         Supplier<String> supplier = () ->
         {
             String str = null;

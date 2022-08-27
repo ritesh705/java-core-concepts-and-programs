@@ -1,4 +1,4 @@
-package com.ritesh.java.concepts.java8.foreach;
+package com.ritesh.java.concepts.java8.lambda;
 
 import java.util.Arrays;
 import java.util.List;

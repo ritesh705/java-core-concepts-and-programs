@@ -1,4 +1,4 @@
-package com.ritesh.java.concepts.java8.streams;
+package com.ritesh.java.concepts.java8.util;
 
 public class Employee
 {
