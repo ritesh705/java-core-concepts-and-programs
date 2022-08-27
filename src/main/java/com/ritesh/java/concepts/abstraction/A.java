@@ -11,5 +11,6 @@ class A extends B
 	{
 		B obj = new A();
 		obj.method();
+		obj.defaultMethod();
 	}
 }
