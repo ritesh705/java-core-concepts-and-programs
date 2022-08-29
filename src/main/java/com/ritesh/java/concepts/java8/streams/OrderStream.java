@@ -23,7 +23,7 @@ public class OrderStream
                 new File(OrderStream.class.getClassLoader().getResource("orders.json").getFile());
         orders = Arrays.asList(new ObjectMapper().readValue(ordersJSON, Order[].class));
 
-        getCheapestProduct();
+        /*getCheapestProduct();
         getRecentOrders();
         orderOnParticularDate();
         sumOfAllOrders();
@@ -33,7 +33,9 @@ public class OrderStream
         getDataMapByCustomer();
         getOrderProductSumDataMap();
         getDataMapByProductCategoryAndNames();
-        getMostExpensiveProductByCategory();
+        getMostExpensiveProductByCategory();*/
+
+        getDataMapByCustomer();
     }
 
     // Get The Cheapest Product Of Category Adult
@@ -124,7 +126,7 @@ public class OrderStream
         // Grouping By Customer Id
         Map<String, List<Order>> dataMap01 =
         orders.stream()
-               .collect(Collectors.groupingBy(o -> o.getCustomer().getId(), Collectors.toList()));
+               .collect(Collectors.groupingBy(o -> o.getCustomer().getId()));
         System.out.println("Data Map By Customer: ");
         dataMap01.entrySet().forEach(System.out::println);
 
@@ -147,6 +149,7 @@ public class OrderStream
                                                                     .sum()));
         System.out.println("Data Map Order, Product Total Sum: ");
         dataMap.entrySet().forEach(System.out::println);
+
     }
 
     // Data Map | Product Category, Product Names
