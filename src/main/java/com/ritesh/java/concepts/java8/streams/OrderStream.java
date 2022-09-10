@@ -1,6 +1,7 @@
 package com.ritesh.java.concepts.java8.streams;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.ritesh.java.concepts.java8.util.Customer;
 import com.ritesh.java.concepts.java8.util.Order;
 import com.ritesh.java.concepts.java8.util.Product;
@@ -16,6 +17,56 @@ public class OrderStream
 {
     private static List<Order> orders = null;
 
+    private static String jsonOrderString = "[ {\n" +
+            "    \"id\": \"123\",\n" +
+            "    \"orderDate\": \"2022-01-01\",\n" +
+            "    \"status\": \"completed\",\n" +
+            "    \"deliveryDate\": \"2022-01-08\",\n" +
+            "    \"customer\": {\n" +
+            "      \"id\": \"001\",\n" +
+            "      \"name\": \"test customer 01\",\n" +
+            "      \"tier\": \"1\"\n" +
+            "    },\n" +
+            "    \"products\": [\n" +
+            "      {\n" +
+            "        \"id\": \"001\",\n" +
+            "        \"name\": \"shirt\",\n" +
+            "        \"category\": \"adult\",\n" +
+            "        \"price\": \"2000\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"id\": \"002\",\n" +
+            "        \"name\": \"pant\",\n" +
+            "        \"category\": \"baby\",\n" +
+            "        \"price\": \"299\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"id\": \"003\",\n" +
+            "        \"name\": \"bottle\",\n" +
+            "        \"category\": \"baby\",\n" +
+            "        \"price\": \"199\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"id\": \"007\",\n" +
+            "        \"name\": \"shirt\",\n" +
+            "        \"category\": \"adult\",\n" +
+            "        \"price\": \"1000\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"id\": \"007\",\n" +
+            "        \"name\": \"shirt\",\n" +
+            "        \"category\": \"adult\",\n" +
+            "        \"price\": \"999\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"id\": \"002\",\n" +
+            "        \"name\": \"pant\",\n" +
+            "        \"category\": \"baby\",\n" +
+            "        \"price\": \"1599\"\n" +
+            "      }\n" +
+            "    ]\n" +
+            "  }]";
+
     public static void main(String[] args) throws IOException
     {
         // getResource, get the resource from src/main/resources
@@ -23,7 +74,7 @@ public class OrderStream
                 new File(OrderStream.class.getClassLoader().getResource("orders.json").getFile());
         orders = Arrays.asList(new ObjectMapper().readValue(ordersJSON, Order[].class));
 
-        /*getCheapestProduct();
+        getCheapestProduct();
         getRecentOrders();
         orderOnParticularDate();
         sumOfAllOrders();
@@ -33,8 +84,7 @@ public class OrderStream
         getDataMapByCustomer();
         getOrderProductSumDataMap();
         getDataMapByProductCategoryAndNames();
-        getMostExpensiveProductByCategory();*/
-
+        getMostExpensiveProductByCategory();
         getDataMapByCustomer();
     }
 
