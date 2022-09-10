@@ -18,12 +18,7 @@ public class OrderStream
 
     public static void main(String[] args) throws IOException
     {
-        // getResource, get the resource from src/main/resources
-        File ordersJSON =
-                new File(OrderStream.class.getClassLoader().getResource("orders.json").getFile());
-        // Here I am using orderJSON File, but it supports String as well
-        orders = Arrays.asList(new ObjectMapper().readValue(ordersJSON, Order[].class));
-
+        loadOrders();
         getCheapestProduct();
         getRecentOrders();
         orderOnParticularDate();
@@ -36,6 +31,15 @@ public class OrderStream
         getDataMapByProductCategoryAndNames();
         getMostExpensiveProductByCategory();
         getDataMapByCustomer();
+    }
+
+    private static void loadOrders() throws IOException
+    {
+        // getResource, get the resource from src/main/resources
+        File ordersJSON =
+                new File(OrderStream.class.getClassLoader().getResource("orders.json").getFile());
+        // orderJSON is File object, but readValue also supports String object
+        orders = Arrays.asList(new ObjectMapper().readValue(ordersJSON, Order[].class));
     }
 
     // Get The Cheapest Product Of Category Adult
