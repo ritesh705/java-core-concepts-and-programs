@@ -13,16 +13,10 @@ public class Lambda
 
     private static void forEachWithLambda()
     {
-        List<String> testLambda = new ArrayList();
+        List<String> testLambda = new ArrayList<>();
         testLambda.add("One");
         testLambda.add("Two");
-        testLambda.forEach(p->printResult(p));
-        testLambda.stream().filter(p->p.equals("One")).forEach(q -> System.out.println(q));
+        testLambda.forEach(System.out::println);
+        testLambda.stream().filter(p->p.equals("One")).forEach(System.out::println);
     }
-
-    private static void printResult(String str)
-    {
-        System.out.println(str);
-    }
-    
 }

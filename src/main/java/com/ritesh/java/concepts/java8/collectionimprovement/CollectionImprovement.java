@@ -25,6 +25,6 @@ public class CollectionImprovement
         List<Map.Entry<String,String>> list = map.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue())
                 .collect(Collectors.toList());
-        list.forEach(System.out :: println);
+        list.forEach(System.out::println);
     }
 }

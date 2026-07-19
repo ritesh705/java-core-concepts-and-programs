@@ -19,18 +19,33 @@ public class OrderStream
     public static void main(String[] args) throws IOException
     {
         loadOrders();
+        printLine();
+        // Filter | FlatMap
         getCheapestProduct();
+        printLine();
         getRecentOrders();
-        orderOnParticularDate();
-        sumOfAllOrders();
-        avgOfAllOrders();
+        printLine();
+        productsOrderedOnParticularDate();
+        printLine();
+        // mapToDouble
+        sumOfAllOrdersInParticularDateRange();
+        printLine();
+        avgOfAllOrdersInParticularDateRange();
+        printLine();
         getStatistics();
+        printLine();
         getDataMapByOrder();
+        printLine();
         getDataMapByCustomer();
+        printLine();
         getOrderProductSumDataMap();
+        printLine();
         getDataMapByProductCategoryAndNames();
+        printLine();
         getMostExpensiveProductByCategory();
+        printLine();
         getDataMapByCustomer();
+        printLine();
     }
 
     private static void loadOrders() throws IOException
@@ -40,18 +55,20 @@ public class OrderStream
                 new File(OrderStream.class.getClassLoader().getResource("orders.json").getFile());
         // orderJSON is File object, but readValue also supports String object
         orders = Arrays.asList(new ObjectMapper().readValue(ordersJSON, Order[].class));
+
     }
 
     // Get The Cheapest Product Of Category Adult
     private static void getCheapestProduct()
     {
-        Product product = orders.stream()
+        orders.stream()
                 .flatMap(o -> o.getProducts().stream())
                 .filter(p -> p.getCategory().equalsIgnoreCase("adult"))
                 .min(Comparator.comparing(Product::getPrice))
-                .get();
-        System.out.println("Cheapest Product From Adult Category: ");
-        System.out.println("01: "+product.getName()+" Price: "+product.getPrice());
+                .ifPresent(p ->
+                        System.out.println("Cheapest Product From Adult Category -> "
+                                +p.getName()
+                                +" | Price: "+p.getPrice()));
     }
 
     // Get 3 Most Recent Orders
@@ -60,13 +77,13 @@ public class OrderStream
         List<Order> threeMostRecentOrders = orders.stream()
                 .sorted(Comparator.comparing(Order::getOrderDate).reversed())
                 .limit(3)
-                .collect(Collectors.toList());
+                .toList();
         System.out.println("Three Most Recent Orders:");
         threeMostRecentOrders.forEach(o -> System.out.println("Order Date: "+o.getOrderDate()));
     }
 
     // Products Ordered On Particular Date
-    private static void orderOnParticularDate()
+    private static void productsOrderedOnParticularDate()
     {
         System.out.println("Orders On Particular Date: ");
         List<Product> productsOrderOnParticularDate = orders.stream()
@@ -80,7 +97,7 @@ public class OrderStream
     }
 
     // Sum Of All Orders In A Particular Date Range
-    private static void sumOfAllOrders()
+    private static void sumOfAllOrdersInParticularDateRange()
     {
         Double sum = orders.stream()
                 .filter(o -> o.getOrderDate().compareTo(LocalDate.of(2022, 01, 01))>=0)
@@ -92,7 +109,7 @@ public class OrderStream
     }
 
     // Average Of All Orders In A Particular Date Range
-    private static void avgOfAllOrders()
+    private static void avgOfAllOrdersInParticularDateRange()
     {
         Double average = orders.stream()
                 .filter(o -> o.getOrderDate().compareTo(LocalDate.of(2022, 01, 01))>=0)
@@ -176,5 +193,10 @@ public class OrderStream
                             Collectors.maxBy(Comparator.comparing(Product::getPrice))));
         System.out.println("Data Map For Most Expensive Product By Category: ");
         dataMap.entrySet().forEach(System.out::println);
+    }
+
+    private static void printLine(){
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
     }
 }

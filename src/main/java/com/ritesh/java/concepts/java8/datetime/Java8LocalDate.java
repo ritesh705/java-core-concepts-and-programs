@@ -39,6 +39,7 @@ public class Java8LocalDate
         // New LocalDate Object | From Java 8 onwards
         testLocalDate = LocalDate.now();
         System.out.println(testLocalDate);
+        System.out.println("Required Date: "+testLocalDate.plusDays(70));
 
         // Parsing String To LocalDate
         testLocalDate = LocalDate.parse("2022-03-29");
@@ -75,6 +76,11 @@ public class Java8LocalDate
         // Formatting LocalDateTime To String
         testLocalDateTimeStr = testLocalDateTime.format(DateTimeFormatter.ISO_DATE_TIME);
         System.out.println(testLocalDateTimeStr);
+
+        // Converting DateTime To Date
+        testLocalDateTime = LocalDateTime.now();
+        String localDateStr = testLocalDateTime.format(DateTimeFormatter.ISO_DATE);
+        System.out.println("DateTime To Date: "+localDateStr);
 
         // Instant Object | From Java 8 onwards
         Instant testInstant = Instant.now();
