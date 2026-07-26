@@ -20,14 +20,12 @@ public class OrderStream
     {
         loadOrders();
         printLine();
-        // Filter | FlatMap
         getCheapestProduct();
         printLine();
         getRecentOrders();
         printLine();
         productsOrderedOnParticularDate();
         printLine();
-        // mapToDouble
         sumOfAllOrdersInParticularDateRange();
         printLine();
         avgOfAllOrdersInParticularDateRange();
