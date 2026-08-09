@@ -26,6 +26,7 @@ public class OrderStream
         printLine();
         productsOrderedOnParticularDate();
         printLine();
+
         sumOfAllOrdersInParticularDateRange();
         printLine();
         avgOfAllOrdersInParticularDateRange();
