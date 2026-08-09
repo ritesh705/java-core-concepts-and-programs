@@ -8,6 +8,7 @@ public class CalculateDate
 {
     public static void main(String[] args) {
         calculateRequiredDate();
+        calculateDaysBetweenTwoDates();
     }
 
     private static void calculateRequiredDate()
