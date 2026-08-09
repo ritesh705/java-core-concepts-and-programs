@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 public class CollectionProgram {
 
     private static final Logger logger = Logger.getLogger(String.valueOf(CollectionProgram.class));
-    private static final Hashtable<String, String> hashTable = new Hashtable<>();
     private static final Map<Integer, String> hashMap = new HashMap<>();
     private static final Map<Integer, String> concurrentHashMap = new ConcurrentHashMap<>();
 
